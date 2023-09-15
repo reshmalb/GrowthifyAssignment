@@ -36,7 +36,7 @@ const fetchSEOData= async(url)=>{
 }
 }
 
-const UrlForm = () => {
+const UrlForm = ({setItems}) => {
     let [url,setUrl]=useState("")
     let [taskID,setTaskId]=useState('')
     const [seoresponses, setSeoresponses]=useState([])
@@ -57,19 +57,18 @@ const UrlForm = () => {
         const seoResponse= await fetchSEOData(normalizedUrl);
         setSeoresponses(seoResponse)
         let tasks=seoResponse.data.tasks ||[]
-        console.log("task",tasks)
-        console.log("result",seoResponse)
+   
         setTask(tasks)
         if (tasks.length > 0 && tasks[0].result) {
           const resultArray = tasks[0].result;
-        
-          // Now 'resultArray' contains the 'result' array
+          const items = seoResponse.data.tasks[0].result[0].items;
+          setItems(items)
+          console.log("items",items)
           resultArray.forEach(resultItem => {
-            // Access resultItem properties as needed
             console.log('Crawl Gateway Address:', resultItem.crawl_gateway_address);
             console.log('Crawl Progress:', resultItem.crawl_progress);
             console.log('Crawl Status:', resultItem.crawl_status);
-            // Access other properties as needed
+          
           });
         }
                     }
@@ -78,7 +77,7 @@ const UrlForm = () => {
 
      
   return (
-    <div className='container'>
+  
         <div className='form-container'>
             <form className='search-form' onSubmit={handleSubmit}>
              <input type="text" placeholder='Enter url'
@@ -90,7 +89,7 @@ const UrlForm = () => {
           
         
          
-    </div>
+  
   )
 }
 

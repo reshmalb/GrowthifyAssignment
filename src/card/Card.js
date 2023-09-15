@@ -1,10 +1,12 @@
 import React from 'react'
 import './Card.css'
 
-const Card = () => {
+const Card = ({key,keyName,value}) => {
   return (
-    < div className='card'>
-    </div>
+    < li style={{style:"none"}}>
+           <h5>{keyName}:{value}</h5>
+        
+    </li>
   )
 }
 

@@ -1,0 +1,15 @@
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    background: transparent;
+    color: white;
+    margin-top: 50px;
+    width:30vw;
+    height: 100vh;
+    gap: 5px;
+    margin-left: 100px;
+    display: flex;
+    flex-direction: column;
+
+  }
