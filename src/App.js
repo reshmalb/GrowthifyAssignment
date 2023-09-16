@@ -5,10 +5,8 @@ import Display from "./Layout/Display";
 
 function App() {
   const [items, setItems] = useState([]);
-  console.log(process.env)
   const setResponseItems = (items) => {
     setItems(items);
-    console.log(items, typeof items);
   };
 
   return (

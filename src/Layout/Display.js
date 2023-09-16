@@ -1,15 +1,21 @@
 import "./Display.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CardItem from "../card/Card";
 import Bar from "./Bar";
+let initial=true;
 
 const Display = ({ items }) => {
   const firstItem = items[0];
   const dataArray = [];
 
   if (!items || items.length === 0) {
-    return <p>''</p>;
-  }
+      return (<p>''</p>) 
+
+    }
+    
+
+  
+  
   const checks = firstItem.checks ? firstItem.checks : {};
   const content = firstItem.meta ? firstItem.meta.content : {};
   const htags = firstItem.meta ? firstItem.meta.htags : {};
@@ -66,10 +72,6 @@ const Display = ({ items }) => {
       }
     }
 
-  console.log("content", content);
-  console.log("errors", errors);
-  console.log("htags", htags);
-  console.log("pagetime", pagetimings);
 
   htagarray = [{ key: "htag count", value: totalTagCount }];
   if (errors) {
@@ -161,10 +163,7 @@ const Display = ({ items }) => {
           : " Not Containing duplicate title",
     },
   ];
-  // const data = [
-  //   { key: "onpage_score", value: firstItem.onpage_score? firstItem.onpage_score:0 },
-  //   { key: "resource_type", value: firstItem.resource_type ?firstItem.resource_type},
-  // ];
+
 
   if (content) {
     contentDetails = [
