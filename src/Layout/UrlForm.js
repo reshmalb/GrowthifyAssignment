@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import SpinnerBar from './spinner';
 
-const fetchSEOData= async(url)=>{
+const fetchSEOData= async(url,apilogin,apipassword)=>{
     const post_array = [];
     post_array.push({
       "url": url,
@@ -19,8 +19,8 @@ const fetchSEOData= async(url)=>{
       method: 'post',
       url: 'https://api.dataforseo.com/v3/on_page/instant_pages',
       auth: {
-        username: 'reshma.lb27@gmail.com',
-        password: 'ea1f3ecf733f58f7'
+        username:apilogin ,
+        password: apipassword
       },
       data: post_array,
       headers: {
@@ -48,7 +48,7 @@ const UrlForm = ({setItems}) => {
     let normalizedUrl='';
 
 
-
+    
 
      const handleSubmit= async (e)=>{
       setIsloading(true)
@@ -61,7 +61,13 @@ const UrlForm = ({setItems}) => {
                      }
                      setupdatedUrl(normalizedUrl)
         console.log("normalurl",normalizedUrl)
-        const seoResponse= await fetchSEOData(normalizedUrl);
+
+        const apilogin=process.env.REACT_APP_API_LOGIN;
+        console.log(apilogin)
+        console.log(process.env)
+        const apipassword=process.env.REACT_APP_API_PASSWORD;
+        console.log(apipassword);
+        const seoResponse= await fetchSEOData(normalizedUrl,apilogin,apipassword);
         setSeoresponses(seoResponse)
         let tasks=seoResponse.data.tasks ||[]
    
@@ -81,8 +87,7 @@ const UrlForm = ({setItems}) => {
      
   return (
   
-  // <div className='form-container'>
-   <div className="d-flex flex-column align-items-center h-50 mt-5">
+  <div className="d-flex flex-column align-items-center h-50 mt-5">
    <Form className="d-flex flex-row align-items-center" onSubmit={handleSubmit}>
         <Form.Group className='mr-3'>
           <Form.Control placeholder="Enter  Website URL"
@@ -91,7 +96,7 @@ const UrlForm = ({setItems}) => {
             onChange={(e)=>setUrl(e.target.value)}/>
         </Form.Group>
         <Button className='btn-sm custom-margin' variant="primary" type="submit">
-          Check SEO
+          Get SEO 
         </Button>
       </Form>
       {isloading && (<SpinnerBar website={updatedurl}/>)}
