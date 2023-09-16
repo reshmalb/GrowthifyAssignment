@@ -20,3 +20,18 @@
     padding-bottom: 20px;
 
   }
+  .bar-container{
+    display: flex;
+    background: transparent;
+    color: white;
+    margin-top: 10px;
+    font-size:25px;
+    font-style: bold;
+    width:100%;
+    gap: 10px;
+    margin-left: 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font: 1em sans-serif;
+    padding-bottom: 30px;
+  }

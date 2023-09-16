@@ -10,20 +10,24 @@ const Display = ({ items }) => {
   if (!items || items.length === 0) {
     return <p>''</p>;
   }
-  const checks = firstItem.checks;
-  const content = firstItem.meta.content;
-  const htags = firstItem.meta.htags;
-  const errors = firstItem.resource_errors;
-  const pagetimings = firstItem.page_timing;
-  const onpagescore=firstItem.onpage_score;
-  const size=firstItem.size;
-  const domsize=firstItem.total_dom_size;
-  const transferrate=firstItem.total_transfer_size;
+  const checks = firstItem.checks ? firstItem.checks:[];
+  const content = firstItem.meta? firstItem.meta.content :[];
+  const htags = firstItem.meta? firstItem.meta.htags :[];
+  const errors = firstItem.resource_errors? firstItem.resource_errors:[];
+  const pagetimings = firstItem.page_timing? firstItem.page_timing:[];
+  const onpagescore=firstItem.onpage_score? firstItem.onpage_score: 0;
+  const size=firstItem.size? firstItem.size:0;
+  const domsize=firstItem.total_dom_size ? firstItem.total_dom_size:0;
+  const transferrate=firstItem.total_transfer_size? firstItem.total_transfer_size:0;
 
-
-
+  let htagarray=[];
+  let contentDetails=[];
+  let errorData=[];
+  let duplicates=[];
   let totalTagCount = 0;
+  let timings=[];
 
+if(htags.length>0)
 for (const tag in htags) {
   if (htags.hasOwnProperty(tag)) {
     if (htags[tag]) {
@@ -36,27 +40,34 @@ for (const tag in htags) {
   console.log("errors", errors);
   console.log("htags", htags);
   console.log("pagetime", pagetimings);
-  const htagarray = [{ key: "htag count", value: totalTagCount }];
-  const errorData = [
+   
+     htagarray = [{ key: "htag count", value: totalTagCount }];
+   if(errors.length>0){
+
+   
+     errorData = [
     { key: "Errors", value: errors.errors=== null? 'No errors found':errors.errors.length },
     { key: "Warnings", value: errors.warnings ===null? 'No warnings found':errors.warnings.length },
   ];
+   }
+   if(pagetimings.length>0){
 
-  const timings = [
-    { key: "Connection Time", value: pagetimings.connection_time },
-    { key: "DOM complete Time", value: pagetimings.dom_complete },
-    { key: "Download Time", value: pagetimings.download_time },
-    { key: " Duration Time", value: pagetimings.duration_time },
-    { key: " Fetch End Time", value: pagetimings.fetch_end },
-    { key: " Time to interactive", value: pagetimings.time_to_interactive },
+   
+    timings = [
+    { key: "Connection Time", value: pagetimings.connection_time ? pagetimings.connection_time: "No data given" },
+    { key: "DOM complete Time", value: pagetimings?.dom_complete? pagetimings.dom_complete:"No data given"  },
+    { key: "Download Time", value: pagetimings?.download_time ? pagetimings.download_time:"No data given" },
+    { key: " Duration Time", value: pagetimings?.duration_time ? pagetimings.duration_time:"No data given"  },
+    { key: " Fetch End Time", value: pagetimings?.fetch_end ? pagetimings.fetch_end:"No data given" },
+    { key: " Time to interactive", value: pagetimings?.time_to_interactive ? pagetimings.time_to_interactive:"No data given"  },
     {
       key: " Time to Secure Connection",
-      value: pagetimings.time_to_secure_connection,
+      value: pagetimings?.time_to_secure_connection ? pagetimings.time_to_secure_connection:"No data given" ,
     },
-    { key: " Waiting Time", value: pagetimings.waiting_time },
+    { key: " Waiting Time", value: pagetimings?.waiting_time? pagetimings.waiting_time:"No data given"  },
   ];
-
-  const duplicates = [
+   }
+    duplicates = [
     {
       key: "Duplicate Content",
       value:
@@ -84,34 +95,39 @@ for (const tag in htags) {
     { key: "resource_type", value: firstItem.resource_type },
   ];
 
-  const contentDetails = [
+  if(content.length>0){
+
+  
+
+  contentDetails = [
     {
       key: "Automated Readability index",
-      value: content.automated_readability_index,
+      value: content.automated_readability_index? content.automated_readability_index:"No data given" ,
     },
     {
       key: "Dale Chall Readability Index",
-      value: content.dale_chall_readability_index,
+      value: content.dale_chall_readability_index ?content.dale_chall_readability_index:"No data given" ,
     },
-    { key: "Plain Text Rate ", value: content.plain_text_rate },
-    { key: "Plain Text Size", value: content.plain_text_size },
-    { key: "Plain Text word Count", value: content.plain_text_word_count },
-    { key: "Smog Readability Index", value: content.smog_readability_index },
+    { key: "Plain Text Rate ", value: content.plain_text_rate?content.plain_text_rate:"No data given"  },
+    { key: "Plain Text Size", value: content.plain_text_size ? content.plain_text_size:"No data given"  },
+    { key: "Plain Text word Count", value: content.plain_text_word_count? content.plain_text_word_count:"No data given"  },
+    { key: "Smog Readability Index", value: content.smog_readability_index ?content.smog_readability_index:"No data given" },
     {
       key: "Title to Content Consistency",
-      value: content.title_to_content_consistency,
+      value: content.title_to_content_consistency ? content.title_to_content_consistency:"No data given" ,
     },
   ];
+}
 
 
 
   return (
     <div className="display-container">
-      <div className="card-container">
-        <Bar color={"success"} label={"On Page Score"} value={onpagescore}/>
-        <Bar color={"warning"} label={"Size"} value={size}/>
-        <Bar color={"danger"} label={"DOM Size"} value={domsize}/>
-        <Bar color={"info"} label={"Transfer Size"} value={transferrate}/>
+      <div className="bar-container">
+      {onpagescore &&(<Bar color={"success"} label={"On Page Score"} value={onpagescore}/>) }  
+      {size && (<Bar color={"primary"} label={"Size"} value={size}/>)}
+       {domsize &&(<Bar color={"success"} label={"DOM Size"} value={domsize}/> )} 
+        {transferrate &&(<Bar color={"primary"} label={"Transfer Size"} value={transferrate}/>)}
 
 
        </div>
