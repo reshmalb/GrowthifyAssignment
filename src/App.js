@@ -13,8 +13,14 @@ const setResponseItems=(items)=>{
 
   return (
     <div className='App'>   
-      <UrlForm  setItems={setResponseItems}/>
-      <Display  items={items||[]}/>
+    <section className='form-section'>
+    <UrlForm  setItems={setResponseItems}/>
+    </section>
+    <section className='display-section'>
+    <Display  items={items||[]}/>
+
+
+    </section>
     
     </div>
   );

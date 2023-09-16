@@ -41,3 +41,22 @@
     font-weight: 600px;
     cursor:pointer
 }
+
+.custom-margin{
+    margin-left:12px;
+}
+.custom-input-width {
+    width: 600px; 
+    max-width: 100%; 
+  }
+  
+  @media (max-width: 768px) {
+    .custom-input-width {
+      width: 100%;
+    }
+  }
+  
+  
+  
+  
+  
