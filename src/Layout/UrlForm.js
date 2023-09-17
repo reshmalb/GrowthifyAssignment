@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 import "./UrlForm.css";
@@ -48,9 +48,9 @@ const fetchSEOData = async (url, apilogin, apipassword) => {
 const UrlForm = ({ setItems }) => {
   let [url, setUrl] = useState("");
   let [isloading, setIsloading] = useState(false);
-  const [seoresponses, setSeoresponses] = useState([]);
-  const [task, setTask] = useState([]);
-  const [itemsArr, setItemArr] = useState([]);
+  //const [seoresponses, setSeoresponses] = useState([]);
+ // const [task, setTask] = useState([]);
+  //const [itemsArr, setItemArr] = useState([]);
   let [updatedurl, setupdatedUrl] = useState("");
   let normalizedUrl = "";
 
