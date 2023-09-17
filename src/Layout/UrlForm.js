@@ -7,7 +7,6 @@ import Form from "react-bootstrap/Form";
 import SpinnerBar from "./spinner";
 
 const fetchSEOData = async (url, apilogin, apipassword) => {
-  console.log(apilogin,apipassword)
   const post_array = [];
   post_array.push({
     url: url,
@@ -68,8 +67,7 @@ const UrlForm = ({ setItems }) => {
       const apilogin = process.env.REACT_APP_API_LOGIN;
 const apipassword = process.env.REACT_APP_API_PASSWORD;
 
-console.log("API Login:", apilogin);
-console.log("API Password:", apipassword);
+
 
       try {
         const seoResponse = await fetchSEOData(normalizedUrl, apilogin, apipassword);

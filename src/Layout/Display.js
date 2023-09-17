@@ -21,9 +21,9 @@ const Display = ({ items }) => {
   const htags = firstItem.meta ? firstItem.meta.htags : {};
   const errors = firstItem.resource_errors ? firstItem.resource_errors : {};
   const pagetimings = firstItem.page_timing ? firstItem.page_timing : {};
-  const onpagescore = firstItem.onpage_score ? firstItem.onpage_score : 0;
-  const size = firstItem.size ? firstItem.size : 0;
-  const domsize = firstItem.total_dom_size ? firstItem.total_dom_size : 0;
+  const onpagescore = firstItem.onpage_score ? firstItem.onpage_score : '';
+  const size = firstItem.size ? firstItem.size : '';
+  const domsize = firstItem.total_dom_size ? firstItem.total_dom_size : '';
   const transferrate = firstItem.total_transfer_size
     ? firstItem.total_transfer_size
     : 0;
