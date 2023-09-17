@@ -48,9 +48,7 @@ const fetchSEOData = async (url, apilogin, apipassword) => {
 const UrlForm = ({ setItems }) => {
   let [url, setUrl] = useState("");
   let [isloading, setIsloading] = useState(false);
-  //const [seoresponses, setSeoresponses] = useState([]);
- // const [task, setTask] = useState([]);
-  //const [itemsArr, setItemArr] = useState([]);
+
   let [updatedurl, setupdatedUrl] = useState("");
   let normalizedUrl = "";
 
